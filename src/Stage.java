@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,10 +13,22 @@ public class Stage {
   public Stage() {
     grid = new Grid();
     actors = new ArrayList<Actor>();
-    actors.add(new Cat(grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get()));
-    actors.add(new Dog(grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get()));
-    actors.add(new Bird(grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get()));    
+    List<Cell> usedCells = new ArrayList<>();
+
+    for(Class<? extends Actor> actorType:  Arrays.asList(Cat.class, Dog.class, Bird.class)) {
+      Cell cell;
+      do {
+        cell = grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get();
+      } while(usedCells.contains(cell));
+      usedCells.add(cell);
+
+      try {
+      actors.add(actorType.getDeclaredConstructor(Cell.class).newInstance(cell));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
+}
 
   public void paint(Graphics g, Point mouseLoc) {
     grid.paint(g, mouseLoc);
