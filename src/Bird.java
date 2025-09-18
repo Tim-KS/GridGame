@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
-public class Bird extends Actor {
+public class Bird extends Actor implements Prey{
   public Bird(Cell inLoc) {
     loc = inLoc;
     color = Color.GREEN;
@@ -23,5 +23,20 @@ public class Bird extends Actor {
     display.add(body);
     display.add(wing1);
     display.add(wing2);
+  }
+
+  @Override
+  public void flee() {
+    throw new UnsupportedOperationException("flee not done: bird");
+  }
+
+  @Override
+  public void move(Grid grid) {
+    throw new UnsupportedOperationException("move not done: bird");
+  }
+
+  @Override 
+  public void interact(Actor other) {
+    throw new UnsupportedOperationException("interact not done: bird");
   }
 }

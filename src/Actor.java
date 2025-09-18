@@ -16,4 +16,8 @@ public abstract class Actor {
       g.drawPolygon(p);
     }
   }
+
+  public abstract void move(Grid grid);
+
+  public abstract void interact(Actor other);
 }

@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
-public class Dog extends Actor {
+public class Dog extends Actor implements Hunter {
   public Dog(Cell inLoc) {
     loc = inLoc;
     color = Color.YELLOW;
@@ -23,5 +23,20 @@ public class Dog extends Actor {
     display.add(face);
     display.add(ear1);
     display.add(ear2);
+  }
+
+  @Override
+  public void hunt() {
+    throw new UnsupportedOperationException("Unimplemented method 'hunt'");
+  }
+
+  @Override
+  public void move(Grid grid) {
+    throw new UnsupportedOperationException("Unimplemented method 'move'");
+  }
+
+  @Override
+  public void interact(Actor other) {
+    throw new UnsupportedOperationException("Unimplemented method 'interact'");
   }
 }

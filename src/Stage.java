@@ -13,6 +13,8 @@ public class Stage {
   public Stage() {
     grid = new Grid();
     actors = new ArrayList<Actor>();
+
+    // ------------ My own code --------------------------------------------------
     List<Cell> usedCells = new ArrayList<>();
 
     for(Class<? extends Actor> actorType:  Arrays.asList(Cat.class, Dog.class, Bird.class)) {
@@ -29,6 +31,7 @@ public class Stage {
     }
   }
 }
+// ------------------------------------------------------------------------------
 
   public void paint(Graphics g, Point mouseLoc) {
     grid.paint(g, mouseLoc);
