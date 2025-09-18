@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
-public class Cat extends Actor {
+public class Cat extends Actor implements Player {
   public Cat(Cell inLoc) {
     loc = inLoc;
     color = Color.BLUE;
@@ -22,5 +22,20 @@ public class Cat extends Actor {
     display.add(face);
     display.add(ear1);
     display.add(ear2);
+  }
+
+  @Override
+  public void movePlayer() {
+    throw new UnsupportedOperationException("movePlayer not done: cat");
+  }
+
+  @Override
+  public void move(Grid grid) {
+    throw new UnsupportedOperationException("move not done: cat");
+  }
+
+  @Override
+  public void interact(Actor other) {
+    throw new UnsupportedOperationException("interact not done: cat");
   }
 }
