@@ -7,6 +7,7 @@ public class Cell extends Rectangle {
   static int size = 35;
   char col;
   int row;
+  public boolean isRock = false;
 
   public Cell(char inCol, int inRow, int x, int y) {
     super(x, y, size, size);
@@ -17,7 +18,12 @@ public class Cell extends Rectangle {
   public void paint(Graphics g, Point mousePos) {
     if(contains(mousePos)) {
       g.setColor(Color.GRAY);
-    } else {
+    }
+    if(isRock) {
+      g.setColor(Color.GRAY);
+      g.fillRect(x, y, size, size);
+    }
+    else {
       g.setColor(Color.WHITE);
     }
     g.fillRect(x, y, size, size);

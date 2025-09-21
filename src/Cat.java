@@ -30,12 +30,12 @@ public class Cat extends Actor implements Player {
   }
 
   @Override
-  public void move(Grid grid) {
-    throw new UnsupportedOperationException("move not done: cat");
+  public void interact(Actor other) {
+    throw new UnsupportedOperationException("interact not done: cat");
   }
 
   @Override
-  public void interact(Actor other) {
-    throw new UnsupportedOperationException("interact not done: cat");
+  public void move(Grid grid) {
+    throw new UnsupportedOperationException("Unimplemented method 'move'");
   }
 }

@@ -1,3 +1,3 @@
 public interface Player {
-    void movePlayer();
+    public void movePlayer();
 }
