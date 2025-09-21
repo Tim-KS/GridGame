@@ -10,6 +10,17 @@ public class Stage {
   Grid grid;
   List<Actor> actors;
 
+  private boolean isNear(Cell cell, List<Cell> usedCells) {
+    for (Cell used : usedCells) {
+      int columnDifference = Math.abs(cell.row - used.col);
+      int rowDifference = Math.abs(cell.row - used.row);
+      if (columnDifference <= 5 && rowDifference <= 5) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public Stage() {
     grid = new Grid();
     actors = new ArrayList<Actor>();
@@ -20,7 +31,7 @@ public class Stage {
       Cell cell;
       do {
         cell = grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get();
-      } while(usedCells.contains(cell) || cell.isRock);
+      } while(usedCells.contains(cell) || cell.isRock || isNear(cell, usedCells));
       usedCells.add(cell);
 
       try {
