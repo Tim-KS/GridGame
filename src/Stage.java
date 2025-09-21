@@ -14,14 +14,13 @@ public class Stage {
     grid = new Grid();
     actors = new ArrayList<Actor>();
 
-    // ------------ My own code --------------------------------------------------
     List<Cell> usedCells = new ArrayList<>();
 
     for(Class<? extends Actor> actorType:  Arrays.asList(Cat.class, Dog.class, Bird.class)) {
       Cell cell;
       do {
         cell = grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get();
-      } while(usedCells.contains(cell));
+      } while(usedCells.contains(cell) || cell.isRock);
       usedCells.add(cell);
 
       try {
@@ -31,7 +30,6 @@ public class Stage {
     }
   }
 }
-// ------------------------------------------------------------------------------
 
   public void paint(Graphics g, Point mouseLoc) {
     grid.paint(g, mouseLoc);
