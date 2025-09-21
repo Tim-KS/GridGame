@@ -13,7 +13,7 @@ public class Stage {
 
   private boolean isNear(Cell cell, List<Cell> usedCells) {
     for (Cell used : usedCells) {
-      int columnDifference = Math.abs(cell.row - used.col);
+      int columnDifference = Math.abs(cell.col - used.col);
       int rowDifference = Math.abs(cell.row - used.row);
       if (columnDifference <= 2 && rowDifference <= 2) {
         return true;
@@ -29,27 +29,37 @@ public class Stage {
     List<Cell> usedCells = new ArrayList<>();
 
     for(Class<? extends Actor> actorType:  Arrays.asList(Cat.class, Dog.class, Bird.class)) {
-      Cell cell;
+      Cell cell = null;
+      int tries = 0;
       do {
-        cell = grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get();
+        cell = grid.cellAtColRow((int) (Math.random() * 20), (int) (Math.random() * 20)).get();
+        tries++;
+        if (tries > 1000) break;
       } while(usedCells.contains(cell) || cell.isRock || isNear(cell, usedCells));
-      usedCells.add(cell);
+      if (tries <= 1000) {
+        usedCells.add(cell);
+        try {
+          actors.add(actorType.getDeclaredConstructor(Cell.class).newInstance(cell));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    }
 
-      try {
-      actors.add(actorType.getDeclaredConstructor(Cell.class).newInstance(cell));
-    } catch (Exception e) {
-      e.printStackTrace();
+    for(int i = 0; i < 2; i++) {
+      Cell cell = null;
+      int tries = 0;
+      do {
+        cell = grid.cellAtColRow((int) (Math.random() * 20), (int) (Math.random() * 20)).get();
+        tries++;
+        if (tries > 1000) break;
+      } while  (usedCells.contains(cell) || cell.isRock || isNear(cell, usedCells));
+      if (tries <= 1000) {
+        usedCells.add(cell);
+        items.add(new Item(cell));
+      }
     }
   }
-    for(int i = 0; i < 2; i++) {
-      Cell cell;
-      do {
-        cell = grid.cellAtColRow((int) (Math.random() * 20) + 1, (int) (Math.random() * 20) + 1).get();
-      } while  (usedCells.contains(cell) || cell.isRock || isNear(cell, usedCells));
-      usedCells.add(cell);
-      items.add(new Item(cell));
-    }
-}
 
   public void paint(Graphics g, Point mouseLoc) {
     grid.paint(g, mouseLoc);
